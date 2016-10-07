@@ -1,5 +1,12 @@
 # Welcome to ASP.NET Core
 
+Sales Portal Api
+
+|    CI    |      Status   |
+|----------|:-------------:|
+| AppVeyor(Windows): |  [![Build status](https://ci.appveyor.com/api/projects/status/p3t9o9x1l0otb04c?svg=true)](https://ci.appveyor.com/project/dominikus1993/backed) |
+| CircleCI(Linux): |[![CircleCI](https://circleci.com/gh/DesignMobileApplicationsWEEIA/Backed.svg?style=svg)](https://circleci.com/gh/DesignMobileApplicationsWEEIA/Backed)|
+
 We've made some big updates in this release, so it’s **important** that you spend a few minutes to learn what’s new.
 
 You've created a new ASP.NET Core project. [Learn what's new](https://go.microsoft.com/fwlink/?LinkId=518016)
