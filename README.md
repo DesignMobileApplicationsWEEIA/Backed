@@ -4,8 +4,8 @@ Sales Portal Api
 
 |    CI    |      Status   |
 |----------|:-------------:|
-| AppVeyor(Windows): |  [![Build status](https://ci.appveyor.com/api/projects/status/p3t9o9x1l0otb04c?svg=true)](https://ci.appveyor.com/project/dominikus1993/backed) |
-| CircleCI(Linux): |[![CircleCI](https://circleci.com/gh/DesignMobileApplicationsWEEIA/Backed.svg?style=svg)](https://circleci.com/gh/DesignMobileApplicationsWEEIA/Backed)|
+| AppVeyor(Windows): |  [![Build status](https://ci.appveyor.com/api/projects/status/3y5m728hfc5vbcw5?svg=true)](https://ci.appveyor.com/project/dominikus1993/backend) |
+| CircleCI(Linux): |[![CircleCI](https://circleci.com/gh/DesignMobileApplicationsWEEIA/Backend.svg?style=svg)](https://circleci.com/gh/DesignMobileApplicationsWEEIA/Backend)|
 
 We've made some big updates in this release, so it’s **important** that you spend a few minutes to learn what’s new.
 

@@ -29,6 +29,7 @@ namespace Backend.Web
         {
             // Add framework services.
             services.AddMvc();
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +38,7 @@ namespace Backend.Web
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseMvc();
+            app.UseMvc().UseSwagger().UseSwaggerUi();
         }
     }
 }
