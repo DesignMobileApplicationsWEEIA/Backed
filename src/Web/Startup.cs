@@ -1,3 +1,10 @@
+using Core.Domain.Database.Implementations;
+using Core.Domain.Database.Interfaces;
+using Core.Domain.Repositories.Implementations;
+using Core.Domain.Repositories.Interfaces;
+using Domain.Repositories.Implementations;
+using Domain.Services.Implementations;
+using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +32,9 @@ namespace Backend.Web
         {
             // Add framework services.
             services.AddMvc();
+            services.AddScoped<IDbManager, DefaultDbContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IBuildingService, BuildingService>();
             services.AddSwaggerGen();
         }
 
