@@ -1,6 +1,5 @@
 using Core.Domain.Database.Implementations;
 using Core.Domain.Database.Interfaces;
-using Core.Domain.Repositories.Implementations;
 using Core.Domain.Repositories.Interfaces;
 using Domain.Repositories.Implementations;
 using Domain.Services.Implementations;
