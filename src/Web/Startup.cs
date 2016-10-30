@@ -7,6 +7,7 @@ using Domain.Services.Implementations;
 using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -32,6 +33,10 @@ namespace Backend.Web
         {
             // Add framework services.
             services.AddMvc();
+
+            services.AddEntityFrameworkNpgsql()
+                .AddDbContext<DefaultDbContext>(options => options.UseNpgsql(Configuration["Data:DbContext:ConnectionString"]));
+
             services.AddScoped<IDbManager, DefaultDbContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IBuildingService, BuildingService>();
@@ -45,6 +50,11 @@ namespace Backend.Web
             loggerFactory.AddDebug();
 
             app.UseMvc().UseSwagger().UseSwaggerUi();
+
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                serviceScope.ServiceProvider.GetService<DefaultDbContext>().Database.Migrate();
+            }
         }
     }
 }
