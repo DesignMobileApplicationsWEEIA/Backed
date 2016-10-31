@@ -33,6 +33,8 @@ namespace Backend.Web
             // Add framework services.
             services.AddMvc();
 
+            services.AddMemoryCache();
+
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<DefaultDbContext>(options => options.UseNpgsql(Configuration["Data:DbContext:LocalConnectionString"]));
 
