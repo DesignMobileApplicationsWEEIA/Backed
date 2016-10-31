@@ -14,7 +14,7 @@ namespace Backend.Web.Controllers
             _buildingService = buildingService;
         }
 
-        [HttpGet("search")]
+        [HttpPost("search")]
         public Result<Building> Search([FromBody] PhoneData phoneData)
         {
             return _buildingService.SearchBuildingWithPhoneData(phoneData);

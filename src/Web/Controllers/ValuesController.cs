@@ -1,13 +1,22 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Core.Domain.Model;
+using Domain.Cache.Interfaces;
 
 namespace Backend.Web.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private readonly ICacheService _cacheService;
+
+        public ValuesController(ICacheService cacheService)
+        {
+            _cacheService = cacheService;
+        }
+
         // GET api/values
         [HttpGet]
         public Result<IEnumerable<string>> Get()
@@ -19,7 +28,9 @@ namespace Backend.Web.Controllers
         [HttpGet("{id}")]
         public Result<string> Get(int id)
         {
-            return Result<string>.Wrap("value2");
+            string key = $"{nameof(ValuesController)}-{nameof(Get)}-{id}";
+
+            return _cacheService.GetOrStore(key, () => Result<string>.Wrap($"value2-{id}-{DateTime.Now}"),TimeSpan.FromMinutes(5));
         }
 
         // POST api/values
