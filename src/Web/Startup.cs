@@ -34,7 +34,7 @@ namespace Backend.Web
             services.AddMvc();
 
             services.AddEntityFrameworkNpgsql()
-                .AddDbContext<DefaultDbContext>(options => options.UseNpgsql(Configuration["Data:DbContext:ConnectionString"]));
+                .AddDbContext<DefaultDbContext>(options => options.UseNpgsql(Configuration["Data:DbContext:LocalConnectionString"]));
 
             services.AddScoped<IDbManager, DefaultDbContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
