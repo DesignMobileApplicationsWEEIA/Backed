@@ -40,7 +40,7 @@ namespace Backend.Web
             services.AddMemoryCache();
 
             services.AddEntityFrameworkNpgsql()
-                .AddDbContext<DefaultDbContext>(options => options.UseNpgsql(Configuration["Data:DbContext:LocalConnectionString"]));
+                .AddDbContext<DefaultDbContext>(options => options.UseNpgsql(Configuration["Data:DbContext:ConnectionString"]));
 
             services.AddScoped<IDbManager, DefaultDbContext>();
             services.AddTransient<ICacheService, InMemoryCacheService>();
