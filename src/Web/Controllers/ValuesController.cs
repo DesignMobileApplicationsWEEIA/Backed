@@ -1,26 +1,36 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using Core.Domain.Model;
+using Domain.Cache.Interfaces;
 
 namespace Backend.Web.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private readonly ICacheService _cacheService;
+
+        public ValuesController(ICacheService cacheService)
+        {
+            _cacheService = cacheService;
+        }
+
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public Result<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Result<IEnumerable<string>>.Wrap(new[] { "value1", "value2" }.AsEnumerable());
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Result<string> Get(int id)
         {
-            return "value";
+            string key = $"{nameof(ValuesController)}-{nameof(Get)}-{id}";
+
+            return _cacheService.GetOrStore(key, () => Result<string>.Wrap($"value2-{id}-{DateTime.Now}"),TimeSpan.FromMinutes(5));
         }
 
         // POST api/values
