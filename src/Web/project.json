@@ -21,7 +21,9 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
     "Npgsql.EntityFrameworkCore.PostgreSQL": "1.1.0",
     "Microsoft.AspNetCore.Routing": "1.1.0",
-    "Microsoft.AspNetCore.Mvc": "1.0.1"
+    "Microsoft.AspNetCore.Hosting": "1.1.0",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
+    "Microsoft.AspNetCore.Mvc": "1.1.0"
   },
 
   "userSecretsId": "virtual-campus99ba6b54-0141-46f0-b6fe-b9e53c50f73b",
