@@ -1,10 +1,9 @@
-using System;
-using Core.Domain.Database.Implementations;
-using Core.Domain.Database.Interfaces;
-using Core.Domain.Repositories.Interfaces;
+using Backend.Web.Database.Implementation;
 using Domain.Cache.Implementations;
 using Domain.Cache.Interfaces;
+using Domain.Database.Interfaces;
 using Domain.Repositories.Implementations;
+using Domain.Repositories.Interfaces;
 using Domain.Services.Implementations;
 using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -40,13 +39,13 @@ namespace Backend.Web
             services.AddMemoryCache();
 
             services.AddEntityFrameworkNpgsql()
-                .AddDbContext<DefaultDbContext>(options => options.UseNpgsql(Configuration["Data:DbContext:ConnectionString"]));
+                .AddDbContext<PostgresDbContext>(options => options.UseNpgsql(Configuration["Data:DbContext:ConnectionString"]));
 
-            services.AddScoped<IDbManager, DefaultDbContext>();
+            services.AddScoped<IDbContext, PostgresDbContext>();
             services.AddTransient<ICacheService, InMemoryCacheService>();
             services.AddScoped<IUnitOfWork>(provider =>
             {
-                var dbManager = provider.GetRequiredService<IDbManager>();
+                var dbManager = provider.GetRequiredService<IDbContext>();
                 var cache = provider.GetRequiredService<IMemoryCache>();
                 return new UnitOfWork(dbManager, cache);
             });
@@ -65,7 +64,7 @@ namespace Backend.Web
 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                serviceScope.ServiceProvider.GetService<DefaultDbContext>().Database.Migrate();
+                serviceScope.ServiceProvider.GetService<PostgresDbContext>().Database.Migrate();
             }
         }
     }
