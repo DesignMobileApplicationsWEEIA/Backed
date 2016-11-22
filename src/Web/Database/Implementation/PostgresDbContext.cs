@@ -14,5 +14,7 @@ namespace Backend.Web.Database.Implementation
         public PostgresDbContext(DbContextOptions options) : base(options)
         {
         }
+
+        public DbSet<Logo> Logos { get; set; }
     }
 }

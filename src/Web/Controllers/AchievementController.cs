@@ -12,10 +12,11 @@ namespace Backend.Web.Controllers
     {
         private readonly AchievementService _achievementService;
 
-        public AchievementController(IUnitOfWork unitOfWork)
+        public AchievementController(AchievementService achievementService)
         {
-            _achievementService = new AchievementService(unitOfWork);
+            _achievementService = achievementService;
         }
+
 
         [HttpGet]
         public Result<IEnumerable<Achievement>> Get()

@@ -8,8 +8,8 @@ using Backend.Web.Database.Implementation;
 namespace Web.Migrations
 {
     [DbContext(typeof(PostgresDbContext))]
-    [Migration("20161122171753_first-migration")]
-    partial class firstmigration
+    [Migration("20161122174952_Second")]
+    partial class Second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,7 +66,8 @@ namespace Web.Migrations
 
                     b.HasIndex("BuildingId");
 
-                    b.HasIndex("LogoId");
+                    b.HasIndex("LogoId")
+                        .IsUnique();
 
                     b.ToTable("Faculties");
                 });
@@ -76,19 +77,17 @@ namespace Web.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long>("BuildingId");
-
                     b.Property<byte[]>("Content");
 
                     b.Property<string>("ContentType");
+
+                    b.Property<long>("FacultyId");
 
                     b.Property<string>("FileName");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BuildingId");
-
-                    b.ToTable("Logo");
+                    b.ToTable("Logos");
                 });
 
             modelBuilder.Entity("Domain.Model.Database.Place", b =>
@@ -116,16 +115,8 @@ namespace Web.Migrations
                         .HasForeignKey("BuildingId");
 
                     b.HasOne("Domain.Model.Database.Logo", "Logo")
-                        .WithMany()
-                        .HasForeignKey("LogoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Domain.Model.Database.Logo", b =>
-                {
-                    b.HasOne("Domain.Model.Database.Building", "Building")
-                        .WithMany()
-                        .HasForeignKey("BuildingId")
+                        .WithOne("Faculty")
+                        .HasForeignKey("Domain.Model.Database.Faculty", "LogoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Web.Migrations
 {
-    public partial class firstmigration : Migration
+    public partial class Second : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,25 +40,19 @@ namespace Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Logo",
+                name: "Logos",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    BuildingId = table.Column<long>(nullable: false),
                     Content = table.Column<byte[]>(nullable: true),
                     ContentType = table.Column<string>(nullable: true),
+                    FacultyId = table.Column<long>(nullable: false),
                     FileName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Logo", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Logo_Buildings_BuildingId",
-                        column: x => x.BuildingId,
-                        principalTable: "Buildings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_Logos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,9 +97,9 @@ namespace Web.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Faculties_Logo_LogoId",
+                        name: "FK_Faculties_Logos_LogoId",
                         column: x => x.LogoId,
-                        principalTable: "Logo",
+                        principalTable: "Logos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -118,12 +112,8 @@ namespace Web.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Faculties_LogoId",
                 table: "Faculties",
-                column: "LogoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Logo_BuildingId",
-                table: "Logo",
-                column: "BuildingId");
+                column: "LogoId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Places_BuildingId",
@@ -143,7 +133,7 @@ namespace Web.Migrations
                 name: "Places");
 
             migrationBuilder.DropTable(
-                name: "Logo");
+                name: "Logos");
 
             migrationBuilder.DropTable(
                 name: "Buildings");
