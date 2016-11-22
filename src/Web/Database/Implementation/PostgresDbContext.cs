@@ -9,6 +9,7 @@ namespace Backend.Web.Database.Implementation
         public DbSet<Place> Places { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
+        public DbSet<Achievement> Achievements { get; set; }
 
         public PostgresDbContext(DbContextOptions options) : base(options)
         {
