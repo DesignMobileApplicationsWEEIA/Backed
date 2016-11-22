@@ -63,10 +63,14 @@ namespace Backend.Web
             loggerFactory.AddDebug();
 
             app.UseMvc().UseSwagger().UseSwaggerUi();
-            Seed.Init(app.ApplicationServices.GetRequiredService<PostgresDbContext>());
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 serviceScope.ServiceProvider.GetService<PostgresDbContext>().Database.Migrate();
+
+                using (var dbContext = app.ApplicationServices.GetRequiredService<PostgresDbContext>())
+                {
+                    Seed.Init(dbContext);
+                }
             }
         }
     }
