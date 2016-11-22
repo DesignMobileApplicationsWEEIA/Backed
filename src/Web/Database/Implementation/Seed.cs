@@ -43,7 +43,7 @@ namespace Web.Migrations
                 Faculties = context.Faculties.ToList(),
                 Name = "Weeia"
             });
-
+            context.SaveChanges();
         }
     }
 }
