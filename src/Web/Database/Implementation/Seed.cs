@@ -20,29 +20,30 @@ namespace Web.Migrations
                ContentType = "png",
             };
 
-            var weeiaPlaces = new List<Place>()
-            {
-                new Place() {Latitude = 51.752497, Longitude = 19.453010},
-                new Place() {Latitude = 51.75532, Longitude = 19.453509},
-            };
 
             var logoRes = context.Logos.Add(weeiaLogo);
 
-            context.Places.AddRange(weeiaPlaces);
-            context.Faculties.Add(new Faculty()
-            {
-                Logo = logoRes.Entity,
-                Name = "WEEIA_LOGO",
-                ShortName = "weeia",
-            });
-            context.Buildings.Add(new Building()
+            var building = context.Buildings.Add(new Building()
             {
                 Address = "Bohdana Stefanowskiego 18/22, Łódź",
-                Places = context.Places.ToList(),
                 Description = "Wydział Elektrotechniki, Elektroniki, Informatyki i Automatyki Politechniki Łódzkiej",
-                Faculties = context.Faculties.ToList(),
                 Name = "Weeia"
             });
+
+            context.Faculties.Add(new Faculty()
+            {
+                LogoId = logoRes.Entity.Id,
+                Name = "WEEIA_LOGO",
+                ShortName = "weeia",
+                BuildingId = building.Entity.Id
+            });
+
+            var weeiaPlaces = new List<Place>()
+            {
+                new Place() {Latitude = 51.752497, Longitude = 19.453010, BuildingId = building.Entity.Id},
+                new Place() {Latitude = 51.75532, Longitude = 19.453509, BuildingId = building.Entity.Id},
+            };
+            context.Places.AddRange(weeiaPlaces);
             context.SaveChanges();
         }
     }
