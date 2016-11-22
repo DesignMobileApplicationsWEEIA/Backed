@@ -16,35 +16,34 @@ namespace Web.Migrations
 
             var weeiaLogo = new Logo()
             {
-               Content = null
+               Content = null,
+               ContentType = "png",
             };
 
             var weeiaPlaces = new List<Place>()
             {
                 new Place() {Latitude = 51.752497, Longitude = 19.453010},
-                new Place() {Latitude = 51.75532, Longitude = 19.453509}
+                new Place() {Latitude = 51.75532, Longitude = 19.453509},
             };
 
-            var weeiaFaculties = new List<Faculty>()
+            var logoRes = context.Logos.Add(weeiaLogo);
+
+            context.Places.AddRange(weeiaPlaces);
+            context.Faculties.Add(new Faculty()
             {
-                new Faculty()
-                {
-                   Logo = weeiaLogo,
-                   Name = "WEEIA_LOGO",
-                   ShortName = "weeia"
-                }
-            };
-
-            var weeia = new Building()
+                Logo = logoRes.Entity,
+                Name = "WEEIA_LOGO",
+                ShortName = "weeia",
+            });
+            context.Buildings.Add(new Building()
             {
                 Address = "Bohdana Stefanowskiego 18/22, Łódź",
-                Places = weeiaPlaces,
+                Places = context.Places.ToList(),
                 Description = "Wydział Elektrotechniki, Elektroniki, Informatyki i Automatyki Politechniki Łódzkiej",
-                Faculties = new List<Faculty>()
-                
-            };
+                Faculties = context.Faculties.ToList(),
+                Name = "Weeia"
+            });
 
-            weeiaPlaces.ForEach(x => x.Building = weeia);
         }
     }
 }
