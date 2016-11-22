@@ -49,7 +49,8 @@ namespace Backend.Web
                 var cache = provider.GetRequiredService<IMemoryCache>();
                 return new UnitOfWork(dbManager, cache);
             });
-
+            services.AddTransient<IAchievementService, AchievementService>();
+            services.AddTransient<IPlaceService, PlaceService>();
             services.AddTransient<IBuildingService, BuildingService>();
             services.AddSwaggerGen();
         }
