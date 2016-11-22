@@ -1,4 +1,5 @@
-﻿using Core.Domain.Model;
+﻿using Domain.Model.Api;
+using Domain.Model.Database;
 using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

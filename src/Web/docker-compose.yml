@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+
+  web:
+    container_name: 'virtual-campus'
+    image: 'virtual-campus'
+    build:
+      context: .
+      dockerfile: virtual-campus.dockerfile
+    volumes:
+     - .:/var/www/virtual-campus
+    ports:
+     - "5000:5000"
+    depends_on:
+     - "postgres"
+    networks:
+      - virtual-campus-network
+
+  postgres:
+    container_name: 'postgres'
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+    networks:
+      - virtual-campus-network
+
+networks:
+  virtual-campus-network:
+    driver: bridge
+
