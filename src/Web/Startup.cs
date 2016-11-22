@@ -13,6 +13,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Web.Migrations;
 
 namespace Backend.Web
 {
@@ -62,7 +63,7 @@ namespace Backend.Web
             loggerFactory.AddDebug();
 
             app.UseMvc().UseSwagger().UseSwaggerUi();
-
+            Seed.Init(app.ApplicationServices.GetRequiredService<PostgresDbContext>());
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 serviceScope.ServiceProvider.GetService<PostgresDbContext>().Database.Migrate();
