@@ -50,7 +50,7 @@ namespace Web.Migrations
 
             var ctiLogo = new Logo
             {
-                Content = File.ReadAllBytes($"{logosPath}/cti.jpg"),
+                Content = File.ReadAllBytes($"{logosPath}cti.jpg"),
                 ContentType = "jpg",
             };
 
