@@ -24,13 +24,21 @@ namespace Backend.Web.Controllers
         public Result<IEnumerable<Place>> Get()
         {
             string key = $"{nameof(Get)}-{nameof(PlaceController)}";
-            return _cacheService.GetOrStore(key, () => _placeService.GetAll(null, string.Empty), TimeSpan.FromDays(1));
+            return _cacheService.GetOrStore(key, () => _placeService.GetAll(), TimeSpan.FromDays(1));
         }
 
         [HttpPost]
         public Result<bool> Search([FromBody] ApiPlace place)
         {
-            return _placeService.Add(place, "");
+            return _placeService.Add(place);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _placeService.Dispose();
+            }
         }
 
     }
