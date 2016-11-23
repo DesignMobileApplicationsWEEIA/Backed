@@ -45,12 +45,7 @@ namespace Backend.Web
 
             services.AddScoped<IDbContext, PostgresDbContext>();
             services.AddTransient<ICacheService, InMemoryCacheService>();
-            services.AddScoped<IUnitOfWork>(provider =>
-            {
-                var dbManager = provider.GetRequiredService<IDbContext>();
-                var cache = provider.GetRequiredService<IMemoryCache>();
-                return new UnitOfWork(dbManager, cache);
-            });
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IAchievementService, AchievementService>();
             services.AddTransient<IPlaceService, PlaceService>();
             services.AddTransient<IBuildingService, BuildingService>();
