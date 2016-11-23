@@ -48,6 +48,8 @@ namespace Backend.Web
             services.AddTransient<IAchievementService, AchievementService>();
             services.AddTransient<IPlaceService, PlaceService>();
             services.AddTransient<IBuildingService, BuildingService>();
+            services.AddTransient<ILogoService, LogoService>();
+            services.AddTransient<IFacultyService, FacultyService>();
             services.AddSwaggerGen();
         }
 
