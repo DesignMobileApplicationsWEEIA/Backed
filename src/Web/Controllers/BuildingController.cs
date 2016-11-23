@@ -1,4 +1,5 @@
-﻿using Domain.Cache.Interfaces;
+﻿using System;
+using Domain.Cache.Interfaces;
 using Domain.Model.Api;
 using Domain.Model.Database;
 using Domain.Services.Interfaces;
@@ -23,7 +24,7 @@ namespace Backend.Web.Controllers
         {
             string key =
                 $"{nameof(Search)}-{phoneData?.Direction}-{phoneData?.PhoneLocation?.Longitude}-{phoneData?.PhoneLocation?.Latitude}";
-            return _buildingService.SearchBuildingWithPhoneData(phoneData);
+            return _cacheService.GetOrStore(key, () => _buildingService.SearchBuildingWithPhoneData(phoneData), TimeSpan.FromHours(1));
         }
 
 
