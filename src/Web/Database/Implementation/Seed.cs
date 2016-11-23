@@ -17,7 +17,7 @@ namespace Web.Migrations
 
             var weeiaLogo = new Logo
             {
-               Content = File.ReadAllBytes($"{logosPath}/logo-weeia.png"),
+               Content = File.ReadAllBytes($"{logosPath}logo-weeia.png"),
                ContentType = "png",
             };
 
@@ -78,6 +78,17 @@ namespace Web.Migrations
                 new Place {Latitude = 51.747364, Longitude = 19.455817, BuildingId = cti.Entity.Id},
             };
             context.Places.AddRange(ctiPlaces);
+
+            var achievements = new List<Achievement>()
+            {
+                new Achievement()
+                {
+                    Latitude = 51.757547,
+                    Longitude = 19.448232,
+                    Name = "Mickiewicza"
+                }
+            };
+            context.Achievements.AddRange(achievements);
             context.SaveChanges();
         }
     }

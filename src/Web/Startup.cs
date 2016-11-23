@@ -1,3 +1,4 @@
+using System.IO;
 using Backend.Web.Database.Implementation;
 using Domain.Cache.Implementations;
 using Domain.Cache.Interfaces;
@@ -40,7 +41,7 @@ namespace Backend.Web
             services.AddMemoryCache();
 
             services.AddEntityFrameworkNpgsql()
-                .AddDbContext<PostgresDbContext>(options => options.UseNpgsql(Configuration["Data:DbContext:LocalConnectionString"]));
+                .AddDbContext<PostgresDbContext>(options => options.UseNpgsql(Configuration["Data:DbContext:ConnectionString"]));
 
             services.AddScoped<IDbContext, PostgresDbContext>();
             services.AddTransient<ICacheService, InMemoryCacheService>();
@@ -69,7 +70,7 @@ namespace Backend.Web
 
                 using (var dbContext = app.ApplicationServices.GetRequiredService<PostgresDbContext>())
                 {
-                    Seed.Init(dbContext, "$\"{env.WebRootPath}{Path.DirectorySeparatorChar}Logos{Path.DirectorySeparatorChar}" );
+                    Seed.Init(dbContext, $"{env.WebRootPath}{Path.DirectorySeparatorChar}Logos{Path.DirectorySeparatorChar}" );
                 }
             }
         }
