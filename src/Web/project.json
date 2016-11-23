@@ -26,7 +26,6 @@
       "version": "1.1.0-preview4-final",
       "type": "build"
     },
-    "Domain": "1.1.4"},
   "userSecretsId": "virtual-campus99ba6b54-0141-46f0-b6fe-b9e53c50f73b",
   "tools": {
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": {
@@ -84,7 +83,8 @@
       "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%"
     ]
   },
-  "tooling": {
-    "defaultNamespace": "Backend.Web"
-  }
+    "tooling": {
+      "defaultNamespace": "Backend.Web"
+    },
+    "Domain": "1.1.5"
 }
