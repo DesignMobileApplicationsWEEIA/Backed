@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Domain.Cache.Interfaces;
 using Domain.Model.Api;
 using Domain.Model.Database;
@@ -25,6 +26,13 @@ namespace Backend.Web.Controllers
             string key =
                 $"{nameof(Search)}-{phoneData?.Direction}-{phoneData?.PhoneLocation?.Longitude}-{phoneData?.PhoneLocation?.Latitude}";
             return _cacheService.GetOrStore(key, () => _buildingService.SearchBuildingWithPhoneData(phoneData), TimeSpan.FromHours(1));
+        }
+
+        [HttpGet]
+        public Result<IEnumerable<Building>> Get()
+        {
+            string key = $"{nameof(BuildingController)}-{nameof(Get)}";
+            return _cacheService.GetOrStore(key, () => _buildingService.GetAll(), TimeSpan.FromHours(1));
         }
 
 
