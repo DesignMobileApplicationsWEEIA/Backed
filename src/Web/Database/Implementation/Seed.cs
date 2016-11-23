@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Domain.Database.Interfaces;
 using Domain.Model.Database;
@@ -7,7 +8,7 @@ namespace Web.Migrations
 {
     public class Seed
     {
-        public static void Init(IDbContext context)
+        public static void Init(IDbContext context, string logosPath)
         {
             if (context.Places.Any())
             {
@@ -16,7 +17,7 @@ namespace Web.Migrations
 
             var weeiaLogo = new Logo
             {
-               Content = null,
+               Content = File.ReadAllBytes($"{logosPath}/logo-weeia.png"),
                ContentType = "png",
             };
 
@@ -49,8 +50,8 @@ namespace Web.Migrations
 
             var ctiLogo = new Logo
             {
-                Content = null,
-                ContentType = "png",
+                Content = File.ReadAllBytes($"{logosPath}/cti.jpg"),
+                ContentType = "jpg",
             };
 
 
