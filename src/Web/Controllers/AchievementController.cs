@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Domain.Model.Api;
 using Domain.Model.Database;
-using Domain.Repositories.Interfaces;
-using Domain.Services.Implementations;
+using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Web.Controllers
@@ -10,9 +9,9 @@ namespace Backend.Web.Controllers
     [Route("api/[controller]")]
     public class AchievementController: Controller
     {
-        private readonly AchievementService _achievementService;
+        private readonly IAchievementService _achievementService;
 
-        public AchievementController(AchievementService achievementService)
+        public AchievementController(IAchievementService achievementService)
         {
             _achievementService = achievementService;
         }
