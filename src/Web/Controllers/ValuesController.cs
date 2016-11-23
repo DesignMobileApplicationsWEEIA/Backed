@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using Core.Domain.Model;
 using Domain.Cache.Interfaces;
+using Domain.Model.Api;
 
 namespace Backend.Web.Controllers
 {

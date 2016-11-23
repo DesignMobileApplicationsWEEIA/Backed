@@ -1,10 +1,10 @@
-using System;
-using Core.Domain.Database.Implementations;
-using Core.Domain.Database.Interfaces;
-using Core.Domain.Repositories.Interfaces;
+using System.IO;
+using Backend.Web.Database.Implementation;
 using Domain.Cache.Implementations;
 using Domain.Cache.Interfaces;
+using Domain.Database.Interfaces;
 using Domain.Repositories.Implementations;
+using Domain.Repositories.Interfaces;
 using Domain.Services.Implementations;
 using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -14,6 +14,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Web.Migrations;
 
 namespace Backend.Web
 {
@@ -40,17 +41,18 @@ namespace Backend.Web
             services.AddMemoryCache();
 
             services.AddEntityFrameworkNpgsql()
-                .AddDbContext<DefaultDbContext>(options => options.UseNpgsql(Configuration["Data:DbContext:LocalConnectionString"]));
+                .AddDbContext<PostgresDbContext>(options => options.UseNpgsql(Configuration["Data:DbContext:ConnectionString"]));
 
-            services.AddScoped<IDbManager, DefaultDbContext>();
+            services.AddScoped<IDbContext, PostgresDbContext>();
             services.AddTransient<ICacheService, InMemoryCacheService>();
             services.AddScoped<IUnitOfWork>(provider =>
             {
-                var dbManager = provider.GetRequiredService<IDbManager>();
+                var dbManager = provider.GetRequiredService<IDbContext>();
                 var cache = provider.GetRequiredService<IMemoryCache>();
                 return new UnitOfWork(dbManager, cache);
             });
-
+            services.AddTransient<IAchievementService, AchievementService>();
+            services.AddTransient<IPlaceService, PlaceService>();
             services.AddTransient<IBuildingService, BuildingService>();
             services.AddSwaggerGen();
         }
@@ -62,10 +64,14 @@ namespace Backend.Web
             loggerFactory.AddDebug();
 
             app.UseMvc().UseSwagger().UseSwaggerUi();
-
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                serviceScope.ServiceProvider.GetService<DefaultDbContext>().Database.Migrate();
+                serviceScope.ServiceProvider.GetService<PostgresDbContext>().Database.Migrate();
+
+                using (var dbContext = app.ApplicationServices.GetRequiredService<PostgresDbContext>())
+                {
+                    Seed.Init(dbContext, $"{env.WebRootPath}{Path.DirectorySeparatorChar}Logos{Path.DirectorySeparatorChar}" );
+                }
             }
         }
     }
