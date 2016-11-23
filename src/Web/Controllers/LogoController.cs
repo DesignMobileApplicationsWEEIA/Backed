@@ -26,5 +26,13 @@ namespace Backend.Web.Controllers
             string key = $"{nameof(LogoController)}-{nameof(Get)}";
             return _cacheService.GetOrStore(key, () => _logoService.GetAll(), TimeSpan.FromHours(1));
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _logoService.Dispose();
+            }
+        }
     }
 }
