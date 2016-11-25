@@ -17,7 +17,7 @@ namespace Web.Migrations
 
             var weeiaLogo = new Logo
             {
-               Content = File.ReadAllBytes($"{logosPath}logo-weeia.png"),
+               Content = File.ReadAllBytes($"{logosPath}eeia.png"),
                ContentType = "png",
             };
 
@@ -76,6 +76,37 @@ namespace Web.Migrations
             {
                 new Place {Latitude = 51.747054, Longitude = 19.455819, BuildingId = cti.Entity.Id},
                 new Place {Latitude = 51.747364, Longitude = 19.455817, BuildingId = cti.Entity.Id},
+            };
+            context.Places.AddRange(ctiPlaces);
+
+            var dmcsLogo = new Logo
+            {
+                Content = File.ReadAllBytes($"{logosPath}dmcs.png"),
+                ContentType = "png",
+            };
+
+
+            var dmcsLogoRes = context.Logos.Add(ctiLogo);
+
+            var dmcs = context.Buildings.Add(new Building
+            {
+                Address = "B-19, Wólczańska 217/223, 90-924 Łódź",
+                Description = "Centrum Technologii Informatycznych – ogólnouczelniana jednostka Politechniki Łódzkiej. Zadaniem Centrum Technologii Informatycznych jest wspieranie kształcenia w zakresie budowania i wykorzystywania",
+                Name = "CTI"
+            });
+
+            context.Faculties.Add(new Faculty
+            {
+                LogoId = dmcsLogoRes.Entity.Id,
+                Name = "CTI_LOGO",
+                ShortName = "CTI",
+                BuildingId = dmcs.Entity.Id
+            });
+
+            var dmcsPlaces = new List<Place>
+            {
+                new Place {Latitude = 51.747054, Longitude = 19.455819, BuildingId = dmcs.Entity.Id},
+                new Place {Latitude = 51.747364, Longitude = 19.455817, BuildingId = dmcs.Entity.Id},
             };
             context.Places.AddRange(ctiPlaces);
 
