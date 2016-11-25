@@ -86,20 +86,20 @@ namespace Web.Migrations
             };
 
 
-            var dmcsLogoRes = context.Logos.Add(ctiLogo);
+            var dmcsLogoRes = context.Logos.Add(dmcsLogo);
 
             var dmcs = context.Buildings.Add(new Building
             {
-                Address = "B-19, Wólczańska 217/223, 90-924 Łódź",
-                Description = "Centrum Technologii Informatycznych – ogólnouczelniana jednostka Politechniki Łódzkiej. Zadaniem Centrum Technologii Informatycznych jest wspieranie kształcenia w zakresie budowania i wykorzystywania",
-                Name = "CTI"
+                Address = "ul. Wólczańska 221/223 budynek B18, 90-924 Łódź, POLSKA",
+                Description = "Katedra Mikroelektroniki i Technik Informatycznych Politechniki Łódzkiej – samodzielna jednostka organizacyjna w ramach Wydziału Elektrotechniki, Elektroniki, Informatyki i Automatyki Politechniki Łódzkiej.",
+                Name = "DMCS"
             });
 
             context.Faculties.Add(new Faculty
             {
                 LogoId = dmcsLogoRes.Entity.Id,
-                Name = "CTI_LOGO",
-                ShortName = "CTI",
+                Name = "WEEIA",
+                ShortName = "WEEIA",
                 BuildingId = dmcs.Entity.Id
             });
 
