@@ -117,7 +117,30 @@ namespace Web.Migrations
                     Latitude = 51.757547,
                     Longitude = 19.448232,
                     Name = "Mickiewicza"
-                }
+                }, new Achievement()
+                {
+                    Latitude = 51.762677,
+                    Longitude = 19.462757,
+                    Name = "Nawrot"
+                },
+                new Achievement()
+                {
+                    Latitude = 51.784018,
+                    Longitude = 19.460465,
+                    Name = "Franciszkanska"
+                },
+                new Achievement()
+                {
+                    Latitude = 51.776804,
+                    Longitude = 19.454947,
+                    Name = "Plac Wolności"
+                },
+                new Achievement()
+                {
+                    Latitude = 51.759056,
+                    Longitude = 19.46774,
+                    Name = "Galeria Łódzka"
+                },
             };
             context.Achievements.AddRange(achievements);
             context.SaveChanges();
