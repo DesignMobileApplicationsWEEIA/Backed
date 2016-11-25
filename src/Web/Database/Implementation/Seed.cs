@@ -105,10 +105,10 @@ namespace Web.Migrations
 
             var dmcsPlaces = new List<Place>
             {
-                new Place {Latitude = 51.747054, Longitude = 19.455819, BuildingId = dmcs.Entity.Id},
-                new Place {Latitude = 51.747364, Longitude = 19.455817, BuildingId = dmcs.Entity.Id},
+                new Place {Latitude = 51.745947, Longitude = 19.455541, BuildingId = dmcs.Entity.Id},
+                new Place {Latitude = 51.745964, Longitude = 19.455907, BuildingId = dmcs.Entity.Id},
             };
-            context.Places.AddRange(ctiPlaces);
+            context.Places.AddRange(dmcsPlaces);
 
             var achievements = new List<Achievement>()
             {
