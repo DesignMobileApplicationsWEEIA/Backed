@@ -141,6 +141,30 @@ namespace Web.Migrations
                     Longitude = 19.46774,
                     Name = "Galeria Łódzka"
                 },
+                new Achievement()
+                {
+                    Latitude = 51.747119,
+                    Longitude = 19.455599,
+                    Name = "CTI1"
+                },
+                new Achievement()
+                {
+                    Latitude = 51.747181,
+                    Longitude = 19.456143,
+                    Name = "CTI2"
+                },
+                new Achievement()
+                {
+                    Latitude = 51.746923,
+                    Longitude = 19.456125,
+                    Name = "CTI3"
+                },
+                new Achievement()
+                {
+                    Latitude = 51.746886,
+                    Longitude = 19.455645,
+                    Name = "CTI4"
+                }
             };
             context.Achievements.AddRange(achievements);
             context.SaveChanges();
