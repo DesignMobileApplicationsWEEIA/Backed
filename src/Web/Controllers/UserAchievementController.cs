@@ -32,5 +32,18 @@ namespace Web.Controllers
         {
             return _userAchievementService.Add(userAchievement);
         }
+
+        [HttpPost]
+        public Result<bool> Post(PhoneData data)
+        {
+            return _userAchievementService.StoreAchievement(data);
+        }
+
+        [HttpPost]
+        public Result<List<AchievementResult>> GetUserAchievements(string macAddress)
+        {
+            string cacheKey = $"{nameof(UserAchievementController)}-{nameof(GetUserAchievements)}-{macAddress}";
+            return _userAchievementService.GetUserAchievements(macAddress);
+        }
     }
 }
