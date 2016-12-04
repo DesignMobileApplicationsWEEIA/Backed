@@ -40,10 +40,10 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public Result<List<AchievementResult>> GetUserAchievements(string macAddress)
+        public Result<List<AchievementResult>> GetUserAchievements(ApiUserData userData)
         {
-            string cacheKey = $"{nameof(UserAchievementController)}-{nameof(GetUserAchievements)}-{macAddress}";
-            return _userAchievementService.GetUserAchievements(macAddress);
+            string cacheKey = $"{nameof(UserAchievementController)}-{nameof(GetUserAchievements)}-{userData.Mac}";
+            return _userAchievementService.GetUserAchievements(userData.Mac);
         }
     }
 }
