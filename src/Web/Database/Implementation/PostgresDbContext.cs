@@ -16,5 +16,6 @@ namespace Backend.Web.Database.Implementation
         }
 
         public DbSet<Logo> Logos { get; set; }
+        public DbSet<UserAchievement> UserAchievements { get; set; }
     }
 }

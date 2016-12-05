@@ -17,7 +17,7 @@ namespace Web.Migrations
 
             var weeiaLogo = new Logo
             {
-               Content = File.ReadAllBytes($"{logosPath}logo-weeia.png"),
+               Content = File.ReadAllBytes($"{logosPath}eeia.png"),
                ContentType = "png",
             };
 
@@ -79,6 +79,37 @@ namespace Web.Migrations
             };
             context.Places.AddRange(ctiPlaces);
 
+            var dmcsLogo = new Logo
+            {
+                Content = File.ReadAllBytes($"{logosPath}dmcs.png"),
+                ContentType = "png",
+            };
+
+
+            var dmcsLogoRes = context.Logos.Add(dmcsLogo);
+
+            var dmcs = context.Buildings.Add(new Building
+            {
+                Address = "ul. Wólczańska 221/223 budynek B18, 90-924 Łódź, POLSKA",
+                Description = "Katedra Mikroelektroniki i Technik Informatycznych Politechniki Łódzkiej – samodzielna jednostka organizacyjna w ramach Wydziału Elektrotechniki, Elektroniki, Informatyki i Automatyki Politechniki Łódzkiej.",
+                Name = "DMCS"
+            });
+
+            context.Faculties.Add(new Faculty
+            {
+                LogoId = dmcsLogoRes.Entity.Id,
+                Name = "WEEIA",
+                ShortName = "WEEIA",
+                BuildingId = dmcs.Entity.Id
+            });
+
+            var dmcsPlaces = new List<Place>
+            {
+                new Place {Latitude = 51.745947, Longitude = 19.455541, BuildingId = dmcs.Entity.Id},
+                new Place {Latitude = 51.745964, Longitude = 19.455907, BuildingId = dmcs.Entity.Id},
+            };
+            context.Places.AddRange(dmcsPlaces);
+
             var achievements = new List<Achievement>()
             {
                 new Achievement()
@@ -86,6 +117,53 @@ namespace Web.Migrations
                     Latitude = 51.757547,
                     Longitude = 19.448232,
                     Name = "Mickiewicza"
+                }, new Achievement()
+                {
+                    Latitude = 51.762677,
+                    Longitude = 19.462757,
+                    Name = "Nawrot"
+                },
+                new Achievement()
+                {
+                    Latitude = 51.784018,
+                    Longitude = 19.460465,
+                    Name = "Franciszkanska"
+                },
+                new Achievement()
+                {
+                    Latitude = 51.776804,
+                    Longitude = 19.454947,
+                    Name = "Plac Wolności"
+                },
+                new Achievement()
+                {
+                    Latitude = 51.759056,
+                    Longitude = 19.46774,
+                    Name = "Galeria Łódzka"
+                },
+                new Achievement()
+                {
+                    Latitude = 51.747119,
+                    Longitude = 19.455599,
+                    Name = "CTI1"
+                },
+                new Achievement()
+                {
+                    Latitude = 51.747181,
+                    Longitude = 19.456143,
+                    Name = "CTI2"
+                },
+                new Achievement()
+                {
+                    Latitude = 51.746923,
+                    Longitude = 19.456125,
+                    Name = "CTI3"
+                },
+                new Achievement()
+                {
+                    Latitude = 51.746886,
+                    Longitude = 19.455645,
+                    Name = "CTI4"
                 }
             };
             context.Achievements.AddRange(achievements);
