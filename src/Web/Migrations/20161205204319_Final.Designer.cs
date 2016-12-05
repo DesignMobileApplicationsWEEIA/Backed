@@ -8,8 +8,8 @@ using Backend.Web.Database.Implementation;
 namespace Web.Migrations
 {
     [DbContext(typeof(PostgresDbContext))]
-    [Migration("20161122174952_Second")]
-    partial class Second
+    [Migration("20161205204319_Final")]
+    partial class Final
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,7 +54,7 @@ namespace Web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("BuildingId");
+                    b.Property<long>("BuildingId");
 
                     b.Property<long>("LogoId");
 
@@ -108,11 +108,28 @@ namespace Web.Migrations
                     b.ToTable("Places");
                 });
 
+            modelBuilder.Entity("Domain.Model.Database.UserAchievement", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("AchievementId");
+
+                    b.Property<string>("MacAddress");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AchievementId");
+
+                    b.ToTable("UserAchievements");
+                });
+
             modelBuilder.Entity("Domain.Model.Database.Faculty", b =>
                 {
-                    b.HasOne("Domain.Model.Database.Building")
+                    b.HasOne("Domain.Model.Database.Building", "Building")
                         .WithMany("Faculties")
-                        .HasForeignKey("BuildingId");
+                        .HasForeignKey("BuildingId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Model.Database.Logo", "Logo")
                         .WithOne("Faculty")
@@ -125,6 +142,14 @@ namespace Web.Migrations
                     b.HasOne("Domain.Model.Database.Building", "Building")
                         .WithMany("Places")
                         .HasForeignKey("BuildingId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.Model.Database.UserAchievement", b =>
+                {
+                    b.HasOne("Domain.Model.Database.Achievement", "Achievement")
+                        .WithMany()
+                        .HasForeignKey("AchievementId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

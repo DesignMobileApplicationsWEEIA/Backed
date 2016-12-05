@@ -98,8 +98,8 @@ namespace Web.Migrations
             context.Faculties.Add(new Faculty
             {
                 LogoId = dmcsLogoRes.Entity.Id,
-                Name = "WEEIA",
-                ShortName = "WEEIA",
+                Name = "DMCS",
+                ShortName = "DMCS",
                 BuildingId = dmcs.Entity.Id
             });
 

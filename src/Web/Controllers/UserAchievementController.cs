@@ -33,13 +33,13 @@ namespace Web.Controllers
             return _userAchievementService.Add(userAchievement);
         }
 
-        [HttpPost]
+        [HttpPost("phoneData")]
         public Result<bool> Post(PhoneData data)
         {
             return _userAchievementService.StoreAchievement(data);
         }
 
-        [HttpPost]
+        [HttpPost("user/achievements")]
         public Result<List<AchievementResult>> GetUserAchievements(ApiUserData userData)
         {
             string cacheKey = $"{nameof(UserAchievementController)}-{nameof(GetUserAchievements)}-{userData.Mac}";
