@@ -28,22 +28,30 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public Result<bool> Post(ApiUserAchievement userAchievement)
+        public Result<bool> Post([FromBody] ApiUserAchievement userAchievement)
         {
             return _userAchievementService.Add(userAchievement);
         }
 
         [HttpPost("phoneData")]
-        public Result<bool> Post(PhoneData data)
+        public Result<bool> Post([FromBody] PhoneData data)
         {
             return _userAchievementService.StoreAchievement(data);
         }
 
         [HttpPost("user/achievements")]
-        public Result<List<AchievementResult>> GetUserAchievements(ApiUserData userData)
+        public Result<List<AchievementResult>> GetUserAchievements( [FromBody] ApiUserData userData)
         {
             string cacheKey = $"{nameof(UserAchievementController)}-{nameof(GetUserAchievements)}-{userData.Mac}";
             return _userAchievementService.GetUserAchievements(userData.Mac);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _userAchievementService.Dispose();
+            }
         }
     }
 }
