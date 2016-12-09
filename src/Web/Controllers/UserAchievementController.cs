@@ -46,6 +46,12 @@ namespace Web.Controllers
             return _userAchievementService.GetUserAchievements(userData.Mac);
         }
 
+        [HttpDelete("user/achievements/{macAddress}")]
+        public Result<bool> GetUserAchievements(string macAddress)
+        {
+            return _userAchievementService.RemoveByMacAddress(macAddress);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

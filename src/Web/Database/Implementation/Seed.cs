@@ -114,26 +114,26 @@ namespace Web.Migrations
             {
                 new Achievement()
                 {
-                    Latitude = 51.747119,
-                    Longitude = 19.455599,
+                    Latitude = 51.747134,
+                    Longitude = 19.455754,
                     Name = "CTI1"
                 },
                 new Achievement()
                 {
-                    Latitude = 51.747181,
-                    Longitude = 19.456143,
+                    Latitude = 51.746611,
+                    Longitude = 19.455870,
                     Name = "CTI2"
                 },
                 new Achievement()
                 {
-                    Latitude = 51.746923,
-                    Longitude = 19.456125,
+                    Latitude = 51.746496,
+                    Longitude = 19.454816,
                     Name = "CTI3"
                 },
                 new Achievement()
                 {
-                    Latitude = 51.746886,
-                    Longitude = 19.455645,
+                    Latitude = 51.747066,
+                    Longitude = 19.454666,
                     Name = "CTI4"
                 }
             };
