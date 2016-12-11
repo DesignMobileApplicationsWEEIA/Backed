@@ -34,7 +34,7 @@ namespace Web.Controllers
         }
 
         [HttpPost("phoneData")]
-        public Result<bool> Post([FromBody] PhoneData data)
+        public Result<Achievement> Post([FromBody] PhoneData data)
         {
             return _userAchievementService.StoreAchievement(data);
         }
